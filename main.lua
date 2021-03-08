@@ -22,18 +22,21 @@ function love.load()
     }
     dapperMan.onGround = false
     dapperMan.quad = love.graphics.newQuad(0, 0, dapperMan.width, dapperMan.height, dapperMan.texture:getWidth(), dapperMan.texture:getHeight())
+    dapperMan.Xflip = 1
 end
 
 function love.update(dt)
     dapperMan.velocity.X = 0
     if love.keyboard.isDown("d") then 
         dapperMan.velocity.X = 100
+        dapperMan.Xflip = 1
     end
     if love.keyboard.isDown("a") then 
         dapperMan.velocity.X = -100
+        dapperMan.Xflip = -1
     end
     if love.keyboard.isDown("w") and dapperMan.onGround == true then 
-        dapperMan.velocity.Y = -500
+        dapperMan.velocity.Y = -350
         dapperMan.onGround = false
     end
     dapperMan.velocity.Y = dapperMan.velocity.Y + gravity * dt
@@ -50,14 +53,14 @@ function love.update(dt)
 end
 
 function love.draw (dt)
-love.graphics.scale(2, 2)
+    love.graphics.scale(2, 2)
     love.graphics.draw(
         dapperMan.texture,
         dapperMan.quad,
         dapperMan.position.X,
         dapperMan.position.Y,
         0,
-        1,
+        dapperMan.Xflip,
         1,
         dapperMan.width / 2,
         dapperMan.height
