@@ -9,11 +9,19 @@ function collider.update()
     
     }
 
-    cowman.Collider.X = cowman.Position.X
-    cowman.Collider.Y = cowman.Position.Y
+    dapperMan.Collider.X = dapperMan.Position.X
+    dapperMAn.Collider.Y = dapperMAn.Position.Y
 end
 
-
+function collideWithWorld()
+    for x = tablelength(world.tiles), 1, -1
+    do
+        if world.tiles[x][y] == 1 then
+            tile = dapperMan.rect
+            
+    end
+    
+end
 
 
 return collision
