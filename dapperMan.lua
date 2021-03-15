@@ -1,6 +1,7 @@
 dapperMan = {}
 
 
+
 function dapperMan.load()
     dapperMan.texture = love.graphics.newImage("Assets/lost_ghost_dapper.png")
     dapperMan.position = {
@@ -16,6 +17,13 @@ function dapperMan.load()
     dapperMan.onGround = false
     dapperMan.quad = love.graphics.newQuad(0, 0, dapperMan.width, dapperMan.height, dapperMan.texture:getWidth(), dapperMan.texture:getHeight())
     dapperMan.Xflip = 1
+    dapperMan.rect = {
+        ["X"] = 0,
+        ["Y"] = 0,
+        ["Width"] = 0,
+        ["Height"] = 0,
+    }
+    
 end
 
 function dapperMan.update(dt)
