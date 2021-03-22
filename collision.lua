@@ -16,8 +16,8 @@ end
 function collideWithWorld()
     for x = tablelength(world.tiles), 1, -1
     do
-        if world.tiles[x][y] == 1 then
-            tile = dapperMan.rect
+        
+        
             
     end
     

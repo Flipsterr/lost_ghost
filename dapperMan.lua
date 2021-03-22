@@ -52,7 +52,7 @@ function dapperMan.update(dt)
     end
 end
 
-function dapperMan:draw()
+function dapperMan.draw()
     love.graphics.draw(
         dapperMan.texture,
         dapperMan.quad,

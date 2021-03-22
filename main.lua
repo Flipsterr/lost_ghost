@@ -1,12 +1,13 @@
 --require("collision")
 require("dapperMan")
-
+require("world")
 
 gravity = 1100
 
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     dapperMan.load()
+    world.load()
 end
 
 function love.update(dt)
@@ -16,7 +17,8 @@ end
 
 function love.draw (dt)
     love.graphics.scale(2, 2)
-    dapperMan:draw()
+    world.draw()
+    dapperMan.draw()
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.line(0, 200, love.graphics.getWidth(), 200)
     love.graphics.setLineWidth(0.2)
