@@ -1,6 +1,6 @@
---require("collision")
 require("dapperMan")
 require("world")
+require("collision")
 
 gravity = 1100
 

@@ -1,6 +1,5 @@
 dapperMan = {}
-
-
+require ("collision")
 
 function dapperMan.load()
     dapperMan.texture = love.graphics.newImage("Assets/lost_ghost_dapper.png")
@@ -24,6 +23,7 @@ function dapperMan.load()
         ["Height"] = 0,
     }
     
+
 end
 
 function dapperMan.update(dt)
