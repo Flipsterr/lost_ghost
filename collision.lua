@@ -1,6 +1,6 @@
-collision = {}
+local world = require ("world")
 
-require ("world")
+collision = {}
 
 
 function left(rect)
@@ -16,76 +16,67 @@ function bottom(rect)
     return rect.Y + rect.Height
 end
 
-function collision.update()
-    dapperMan.collider = {
-        ["X"] = 0,
-        ["Y"] = 0,
-        ["Width"] = 8,
-        ["Height"] = 8,
-    
-    }
 
-    dapperMan.collider.X = dapperMan.X
-    dapperMan.collider.Y = dapperMan.Y
-end
-
-function collideWithWorld()
-    for x = tablelength(world.tiles), 1, -1
+function collision.collideWithWorld(entity, dt)
+    for x = #world.tiles, 1, -1
     do
-        if world.tiles [x] [y] == 1 then 
-            rect = rectangle
-            rect.x = y * 8 -4
-            rect.y = x * 8 -8
-            rect.width = 8
-            rect.height = 8
-            solveCollision(rect)
+        for  y = #world.tiles[1], 1, -1
+        do
+            if world.tiles [x] [y] == 1 then 
+                rect = {}
+                rect.X = y * 8 -4
+                rect.Y = x * 8 
+                rect.Width = 8
+                rect.Height = 8
+                solveCollision(entity, rect, dt)
+            end
         end
     end
 end
 
-function IsTouchingLeft(rect)
-    return left(dapperMan.collider) + dapperMan.velocity.X < right(rect) and 
-    right(dapperMan.collider) > right(rect) and
-    bottom(dapperMan.collider) > top(rect) and
-    top(dapperMan.collider) < bottom(rect)
+function IsTouchingLeft(entity, rect, dt)
+    return left(entity.collider) + entity.velocity.X * dt < right(rect) and 
+    right(entity.collider) > right(rect) and
+    bottom(entity.collider) > top(rect) and
+    top(entity.collider) < bottom(rect)
 end
 
-function IsTouchingRight(rect)
-    return right(dapperMan.collider) + dapperMan.velocity.X > right(rect) and 
-    left(dapperMan.collider) < left(rect) and
-    bottom(dapperMan.collider) > top(rect) and
-    top(cowman.collider) < bottom(rect)
+function IsTouchingRight(entity, rect, dt)
+    return right(entity.collider) + entity.velocity.X * dt > left(rect) and 
+    left(entity.collider) < left(rect) and
+    bottom(entity.collider) > top(rect) and
+    top(entity.collider) < bottom(rect)
 end
 
-function IsTouchingTop(rect)
-    return top(dapperMan.collider) + dapperMan.velocity.y < bottom(rect) and 
-    bottom(dapperMan.collider) > bottom(rect) and
-    right(dapperMan.collider) > left(rect) and
-    left(dapperMan.collider) < right(rect)
+function IsTouchingTop(entity, rect, dt)
+    return top(entity.collider) + entity.velocity.Y * dt < bottom(rect) and 
+    bottom(entity.collider) > bottom(rect) and
+    right(entity.collider) > left(rect) and
+    left(entity.collider) < right(rect)
 end
 
-function IsTouchingBottom(rect)
-    return bottom(dapperMan.collider) + dapperMan.velocity.y > top(rect) and 
-    top(dapperMan.collider) < top(rect) and
-    right(dapperMan.collider) > left(rect) and
-    left(cowman.collider) < right(rect)
+function IsTouchingBottom(entity, rect, dt)
+    return bottom(entity.collider) + entity.velocity.Y * dt > top(rect) and 
+    top(entity.collider) < top(rect) and
+    right(entity.collider) > left(rect) and
+    left(entity.collider) < right(rect)
 end
 
-function solveCollision(rect)
+function solveCollision(entity, rect, dt)
 
-    if touchesLeft(rect) == true then
-        dapperMan.velocity.X = right(rect) - left(dapperMan.collider)
+    if IsTouchingLeft(entity, rect, dt) == true then
+        entity.velocity.X = (right(rect) - left(entity.collider))/dt
     end
-    if IsTouchingRight(rect) == true then
-        dapperMan.velocity.X = left(rect) - right(dapperMan.Collider)
+    if IsTouchingRight(entity, rect, dt) == true then
+        entity.velocity.X = (left(rect) - right(entity.collider))/dt
     end
-    if IsTouchingTop(rect) == true then
-        dapperMan.velocity.Y = bottom(rect) - top(cowman.Collider)
+    if IsTouchingTop(entity, rect, dt) == true then
+        entity.velocity.Y = (bottom(rect) - top(entity.collider))/dt
     end
-    if IsTouchingBottom(rect) == true then
-        dapperMan.velocity.Y = top(rect) - bottom(dapperMan.Collider)
+    if IsTouchingBottom(entity, rect, dt) == true then
+        entity.velocity.Y = (top(rect) - bottom(entity.collider))/dt
 
-        cowman.OnGround = true;
+        entity.onGround = true;
     end
         
 end

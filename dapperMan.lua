@@ -1,11 +1,13 @@
+
+local collision = require ("collision")
+
 dapperMan = {}
-require ("collision")
 
 function dapperMan.load()
     dapperMan.texture = love.graphics.newImage("Assets/lost_ghost_dapper.png")
     dapperMan.position = {
-        ["X"] = 200,
-        ["Y"] = 300
+        ["X"] = 100,
+        ["Y"] = 100
     }
     dapperMan.width = 16
     dapperMan.height = 16
@@ -16,13 +18,15 @@ function dapperMan.load()
     dapperMan.onGround = false
     dapperMan.quad = love.graphics.newQuad(0, 0, dapperMan.width, dapperMan.height, dapperMan.texture:getWidth(), dapperMan.texture:getHeight())
     dapperMan.Xflip = 1
-    dapperMan.rect = {
+    dapperMan.collider = {
         ["X"] = 0,
         ["Y"] = 0,
-        ["Width"] = 0,
-        ["Height"] = 0,
-    }
+        ["Width"] = 8,
+        ["Height"] = 14
     
+    }
+
+    dapperMan.colliderOffset = -5.3
 
 end
 
@@ -42,14 +46,15 @@ function dapperMan.update(dt)
     end
     dapperMan.velocity.Y = dapperMan.velocity.Y + gravity * dt
 
+    dapperMan.collider.X = dapperMan.position.X
+    dapperMan.collider.Y = dapperMan.position.Y + dapperMan.colliderOffset
+
+    collision.collideWithWorld(dapperMan, dt)
+
     dapperMan.position.X = dapperMan.position.X + dapperMan.velocity.X * dt
     dapperMan.position.Y = dapperMan.position.Y + dapperMan.velocity.Y * dt
 
-    dapperMan.position.Y = math.min(dapperMan.position.Y, 200)
 
-    if dapperMan.position.Y == 200 then 
-        dapperMan.onGround = true
-    end
 end
 
 function dapperMan.draw()

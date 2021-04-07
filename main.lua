@@ -1,6 +1,5 @@
-require("dapperMan")
-require("world")
-require("collision")
+local dapperMan = require("dapperMan")
+local world = require("world")
 
 gravity = 1100
 
@@ -19,8 +18,5 @@ function love.draw (dt)
     love.graphics.scale(2, 2)
     world.draw()
     dapperMan.draw()
-    love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.line(0, 200, love.graphics.getWidth(), 200)
-    love.graphics.setLineWidth(0.2)
 end
 

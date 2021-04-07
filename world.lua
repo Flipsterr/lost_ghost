@@ -28,9 +28,9 @@ function world.load()
 end
 
 function world.draw()
-    for x = tablelength(world.tiles[1]), 1, -1 
+    for x = #world.tiles[1], 1, -1 
     do
-        for y = tablelength(world.tiles[1]), 1, -1 
+        for y = #world.tiles[1], 1, -1 
         do 
             if world.tiles [x][y] == 1 then
                 love.graphics.draw(world.texture, world.quad, y * 8 - 8, x * 8 - 8)
@@ -39,10 +39,5 @@ function world.draw()
     end
 end
 
-function tablelength(T)
-    local count = 0
-    for _ in ipairs(T) do count = count + 1 end
-    return count
-end
 
 return world
