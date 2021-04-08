@@ -1,5 +1,7 @@
 
 local collision = require ("collision")
+local door = require ("door")
+local world1 = require ("world1")
 
 dapperMan = {}
 
@@ -30,6 +32,11 @@ function dapperMan.load()
 
 end
 
+function worldCollision(world)
+    collision.collideWithWorld(dapperMan, dt, world)
+end
+
+
 function dapperMan.update(dt)
     dapperMan.velocity.X = 0
     if love.keyboard.isDown("d") then 
@@ -49,10 +56,18 @@ function dapperMan.update(dt)
     dapperMan.collider.X = dapperMan.position.X
     dapperMan.collider.Y = dapperMan.position.Y + dapperMan.colliderOffset
 
-    collision.collideWithWorld(dapperMan, dt)
+    collision.collideWithWorld(dapperMan, dt, world.tiles)
 
     dapperMan.position.X = dapperMan.position.X + dapperMan.velocity.X * dt
     dapperMan.position.Y = dapperMan.position.Y + dapperMan.velocity.Y * dt
+
+    if door.position.X -8 < dapperMan.position.X and dapperMan.position.X < door.position.X + 8 and key == "e" then
+        print("it worked!")
+        world1.load()
+        world1.draw()
+        collision.collideWithWorld(dapperMan, dt, world.tiles1)
+    end
+
 
 
 end

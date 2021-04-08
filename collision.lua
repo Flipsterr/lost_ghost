@@ -17,12 +17,12 @@ function bottom(rect)
 end
 
 
-function collision.collideWithWorld(entity, dt)
-    for x = #world.tiles, 1, -1
+function collision.collideWithWorld(entity, dt, w)
+    for x = #w, 1, -1
     do
-        for  y = #world.tiles[1], 1, -1
+        for  y = #w[1], 1, -1
         do
-            if world.tiles [x] [y] == 1 then 
+            if w [x] [y] == 1 then 
                 rect = {}
                 rect.X = y * 8 -4
                 rect.Y = x * 8 
