@@ -1,31 +1,38 @@
 local dapperMan = require("dapperMan")
 local world = require("world")
 local door = require("door")
+local door2 = require("door_2")
 local world1 = require("world1")
+local world2 = require("world2")
+local worldSwitch = require("worldSwitch")
 
-gravity = 1100
+gravity = 1110
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     world.load()
     door.load()
+    door2.load()
     dapperMan.load()
     world1.load()
-    
-end
-
-function love.update(dt)
-    dapperMan.update(dt)
-    if door.position.X -8 < dapperMan.position.X and dapperMan.position.X < door.position.X + 8 and love.keyboard.isDown ("e") then
-        drawWorld = world1.draw
-        worldTiles = world.tiles1
-    end
+    world2.load()
+    print(worldTiles)
+    print(world1.tiles)
 end
 
 drawWorld = world.draw
 
+function love.update(dt)
+    dapperMan.update(dt)
+    goToWorld1()
+    goToWorld2()
+    goBackFromWorld1()
+end
+
+
 function love.draw (dt)
     love.graphics.scale(2, 2)
     drawWorld()
-    dapperMan.draw()
     door.draw()
+    door2.draw()
+    dapperMan.draw()
 end

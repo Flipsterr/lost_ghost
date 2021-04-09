@@ -15,14 +15,20 @@ function world.load()
     world.texture = love.graphics.newImage("Assets/tile_map_sand.png")
     world.quad = love.graphics.newQuad(0,0,8,8,world.texture:getWidth(),world.texture:getHeight())
 
+    -- r = id på spriten
+    -- r = 1: tile
+    -- r = 2: dörr
+    -- r = 3: (fiende wip)
+
     for x = image:getWidth() - 1, 1, -1 
     do
         for y = image:getHeight() -1, 1, -1 
         do
-            local r, g, b = imageInfo:getPixel(x, y)
-            if g > 0 then
+            local r, g, b, a = imageInfo:getPixel(x, y) 
+            if g == 0 then
                 world.tiles [y][x] = 1
-            end
+            else if g > 0 then
+                
         end
     end
 end

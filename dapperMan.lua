@@ -31,6 +31,7 @@ function dapperMan.load()
     }
 
     dapperMan.colliderOffset = -5.3
+    
     worldTiles = world.tiles
 end
 
