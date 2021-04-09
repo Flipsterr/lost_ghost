@@ -1,49 +1,57 @@
- world = {}
+local world = {}
 
-function world.load()
-    imageInfo = love.image.newImageData("Assets/test_level.png")
+function loadLevel (levelNumber)
+    imageInfo = love.image.newImageData(Levels[levelNumber])
     image = love.graphics.newImage(imageInfo)
 
-    world.tiles = {}
+    Tiles = {}
+    Sprites = {}
     for i = 1, image:getWidth() do 
-        world.tiles[i] = {}
+        Tiles[i] = {}
         for j = 1, image:getHeight() do
-            world.tiles[i][j] = 0
+            Tiles[i][j] = 0
         end
     end
 
-    world.texture = love.graphics.newImage("Assets/tile_map_sand.png")
-    world.quad = love.graphics.newQuad(0,0,8,8,world.texture:getWidth(),world.texture:getHeight())
+    for x = image:getWidth() - 1, 1, -1 do
 
-    -- r = id på spriten
-    -- r = 1: tile
-    -- r = 2: dörr
-    -- r = 3: (fiende wip)
-
-    for x = image:getWidth() - 1, 1, -1 
-    do
-        for y = image:getHeight() -1, 1, -1 
-        do
-            local r, g, b, a = imageInfo:getPixel(x, y) 
-            if g == 0 then
-                world.tiles [y][x] = 1
-            else if g > 0 then
-                
-        end
-    end
-end
-
-function world.draw()
-    for x = #world.tiles[1], 1, -1 
-    do
-        for y = #world.tiles[1], 1, -1 
-        do 
-            if world.tiles [x][y] == 1 then
-                love.graphics.draw(world.texture, world.quad, y * 8 - 8, x * 8 - 8)
+        for y = image:getHeight() -1, 1, -1 do
+            local r, g, b, a = imageInfo:getPixel(x, y)
+            r, g, b, a = math.floor(r*256), math.floor(g*256), math.floor(b*256), math.floor(a*256)
+            if r == 1 then
+                Tiles [y][x] = 1
+            end
+            if r == 2 then 
+                table.insert(Sprites, makeDoor(x*8, y*8, g, b, a))
             end
         end
     end
 end
 
+function drawTiles()
+    for x = #Tiles, 1, -1 
+    do
+        for y = #Tiles[1], 1, -1 
+        do 
+            if Tiles [x][y] == 1 then
+                love.graphics.draw(tileTexture, tileQuad, y * 8 - 8, x * 8 - 8)
+            end
+        end
+    end
+end
+
+function drawSprite (sprite)
+    love.graphics.draw(
+        sprite.texture,
+        love.graphics.newQuad(0, 0, sprite.texture:getWidth(), sprite.texture:getHeight(), sprite.texture:getWidth(), sprite.texture:getHeight()),
+        sprite.X,
+        sprite.Y,
+        0,
+        sprite.Xflip or 1,
+        1,
+        sprite.texture:getWidth() / 2,
+        sprite.texture:getHeight()
+    )
+end
 
 return world

@@ -1,8 +1,5 @@
 
 local collision = require ("collision")
-local door = require ("door")
-local world = require ("world")
-local world1 = require ("world1")
 
 dapperMan = {}
 
@@ -32,7 +29,6 @@ function dapperMan.load()
 
     dapperMan.colliderOffset = -5.3
     
-    worldTiles = world.tiles
 end
 
 
@@ -50,12 +46,12 @@ function dapperMan.update(dt)
         dapperMan.velocity.Y = -350
         dapperMan.onGround = false
     end
-    dapperMan.velocity.Y = dapperMan.velocity.Y + gravity * dt
+    dapperMan.velocity.Y = dapperMan.velocity.Y + Gravity * dt
 
     dapperMan.collider.X = dapperMan.position.X
     dapperMan.collider.Y = dapperMan.position.Y + dapperMan.colliderOffset
 
-    collision.collideWithWorld(dapperMan, dt, worldTiles)
+    collision.collideWithWorld(dapperMan, dt, Tiles)
 
     dapperMan.position.X = dapperMan.position.X + dapperMan.velocity.X * dt
     dapperMan.position.Y = dapperMan.position.Y + dapperMan.velocity.Y * dt
