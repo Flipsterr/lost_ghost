@@ -22,7 +22,7 @@ function loadLevel (levelNumber)
                 Tiles [y][x] = 1
             end
             if r == 2 then 
-                table.insert(Sprites, makeDoor(x*8, y*8, g, b, a))
+                Sprites[#Sprites + 1] = makeDoor(x*8, y*8, g, b, a)
             end
         end
     end
