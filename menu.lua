@@ -37,15 +37,15 @@ end
     mx = love.mouse.getX()
     my = love.mouse.getY()
     if mx+150 > playButton.X*0.6 and mx+150 < playButton.X*0.6 + playButton.width and my+100 > playButton.Y*0.6 and my+100 < playButton.Y*0.6 + playButton.height*0.6 and love.mouse.isDown(1) == true then
-      screen = 1
+      Screen = 1
     end
     if mx+150 > tutorialButton.X*0.6 and mx+150 < tutorialButton.X*0.6 + tutorialButton.width and my+100 > tutorialButton.Y*0.6 and my+100 < tutorialButton.Y*0.6 + tutorialButton.height*0.6 and love.mouse.isDown(1) == true then
-      screen = 2
+      Screen = 2
     end
   end
   
 function drawMenu()
-    if screen == 0 then
+    if Screen == 0 then
       love.graphics.scale(0.6, 0.6)
       love.graphics.draw(title.texture,
       title.quad,
@@ -97,7 +97,7 @@ end
 
 function updateTutorialScreen()
     if mx+150 > playButton.X*0.6 and mx+150 < playButton.X*0.6 + playButton.width and my+100 > playButton.Y*0.6 and my+100 < playButton.Y*0.6 + playButton.height*0.6 and love.mouse.isDown(1) == true then
-        screen = 1
+        Screen = 1
     end
 end
 

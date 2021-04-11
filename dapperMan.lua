@@ -1,5 +1,6 @@
 
 local collision = require ("collision")
+local world = require ("world")
 
 dapperMan = {}
 
@@ -8,7 +9,7 @@ function dapperMan.load()
     dapperMan.texture = love.graphics.newImage("Assets/lost_ghost_dapper.png")
     dapperMan.position = {
         ["X"] = 100,
-        ["Y"] = 100
+        ["Y"] = 270
     }
     dapperMan.width = 16
     dapperMan.height = 16
@@ -29,6 +30,7 @@ function dapperMan.load()
 
     dapperMan.colliderOffset = -5.3
     
+    worldTiles = world.tiles
 end
 
 
@@ -46,12 +48,12 @@ function dapperMan.update(dt)
         dapperMan.velocity.Y = -350
         dapperMan.onGround = false
     end
-    dapperMan.velocity.Y = dapperMan.velocity.Y + Gravity * dt
+    dapperMan.velocity.Y = dapperMan.velocity.Y + gravity * dt
 
     dapperMan.collider.X = dapperMan.position.X
     dapperMan.collider.Y = dapperMan.position.Y + dapperMan.colliderOffset
 
-    collision.collideWithWorld(dapperMan, dt, Tiles)
+    collision.collideWithWorld(dapperMan, dt, worldTiles)
 
     dapperMan.position.X = dapperMan.position.X + dapperMan.velocity.X * dt
     dapperMan.position.Y = dapperMan.position.Y + dapperMan.velocity.Y * dt
