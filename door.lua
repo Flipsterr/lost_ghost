@@ -35,7 +35,7 @@ end
 
   doors =  {
     loadDoor( 10000, 200, 1, 300, 150),
-    loadDoor( 300, 153, 2, 100, 200),
+    loadDoor( 300, 225, 2, 100, 200),
     loadDoor( 10000, 200, 3, 200, 100),
     loadDoor( 10000, 200, 4, 200, 100),
     loadDoor( 10000, 200, 5, 200, 100)
@@ -68,7 +68,7 @@ function setDoors(d)
             loadDoor( doorOffset, 300, 1, 100, 270),
             loadDoor( doorOffset, 200, 2, 100, 270),
             loadDoor( doorOffset, 100, 3, 100, 270),
-            loadDoor( 43, 95, 4, 100, 270),
+            loadDoor( 43, 96, 4, 100, 270),
             loadDoor( doorOffset, 200, 5, 100, 270)
         }
         return doors
@@ -79,7 +79,7 @@ function setDoors(d)
             loadDoor( doorOffset, 220, 2, 100, 270),
             loadDoor( doorOffset, 100, 3, 100, 270),
             loadDoor( doorOffset, 300, 4, 100, 270),
-            loadDoor( 250, 50, 5, 100, 270)
+            loadDoor( 300, 153, 5, 100, 270)
         }
         return doors
     end
@@ -122,19 +122,20 @@ function updateDoor()
             if distance < 8 and doors[i].id == 2 then
                 world.load(Levels[2])
                 worldTiles = world.tiles
+                dapperMan.position.Y = 155
                 setDoors(2)
             end
             if distance < 8 and doors[i].id == 3 then
                 world.load(Levels[3])
                 worldTiles = world.tiles
                 setDoors(3)
-                dapperMan.position.Y = dapperMan.position.Y + 100
+                dapperMan.position.Y = dapperMan.position.Y + 170
             end
             if distance < 8 and doors[i].id == 4 then
                 world.load(Levels[4])
                 worldTiles = world.tiles
                 setDoors(4)
-                dapperMan.position.Y = dapperMan.position.Y + 100
+                dapperMan.position.Y = dapperMan.position.Y + 170
             end
             if distance < 8 and doors[i].id == 5 then
                 Screen = 3
