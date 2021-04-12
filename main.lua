@@ -25,6 +25,7 @@ function love.update(dt)
     end
     if Screen == 2 then
         updateTutorialScreen()
+        updateMenu()
     end
 end
 
